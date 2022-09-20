@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail View</title>
+</head>
+<body>
+    <style type="text/css">
+        .post_block {
+
+        }
+        .post_block h1 {
+            text-align: center;
+            color: #242b2e;
+        }
+        .post_block h5 {
+            text-align: center;
+            color: #242b2e;
+        }
+    </style>
+    <div class="post_block">
+        <h1>{{ post.title }}</h1>
+        <h5>{{ post.description }}</h5>
+        <p>{{ post.date }}</p>
+        <p>{{ post.stars }}</p>
+        <p>{{ post.type }}</p>
+    </div>
+    <div class="comments">
+        {% for comment in comments %}
+            <div class="comment_block">
+                <h3>Author: {{ comment.author }}</h3>
+                <p>{{ comment.text }}</p>
+                <p>{{ comment.created_date }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
