@@ -23,3 +23,17 @@ class PostForm(forms.Form):
         choices=POST_TYPE_CHOICES
     )
 
+
+class Commentform(forms.Form):
+    author = forms.CharField(
+        label="автор",
+        max_length=100,
+        min_length=3
+    )
+
+    text = forms.CharField(
+        widget=forms.Textarea(),
+        label="Text",
+        max_length=200,
+        min_length=5
+    )
