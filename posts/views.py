@@ -5,12 +5,17 @@ from posts.forms import PostForm, Commentform
 from posts.models import Post, Comment
 
 
+def get_user_from_request(request):
+    return request.user if not request.user.is_anonymous else None
+
+
 def main(request):
     if request.method == 'GET':
         posts = Post.objects.all()
 
         data = {
-            'posts': posts
+            'posts': posts,
+            'user': get_user_from_request(request)
         }
 
         return render(request, 'posts.html', context=data)
@@ -49,8 +54,9 @@ def post_detail(request, id):
 
 def create_post(request):
     if request.method == "GET":
-        return render(request, 'create_post.html', context={
-            'post_form': PostForm
+        if get_user_from_request(request):
+            return render(request, 'create_post.html', context={
+                'post_form': PostForm
         })
 
     if request.method == "POST":
@@ -67,6 +73,7 @@ def create_post(request):
             return render(request, 'create_post.html', context={
                 'post_form': form
             })
+
 
 def creat_comment(request):
     if request.method == 'GET':
@@ -86,3 +93,4 @@ def creat_comment(request):
             return render(request, 'creat_comment.html', context={
                 'post_form': form
             })
+

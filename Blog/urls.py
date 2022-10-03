@@ -18,11 +18,16 @@ from django.urls import path
 from posts.views import main, post_detail, create_post
 from django.conf import settings
 from django.conf.urls.static import static
+from users.views import register_view, login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main),
     path('posts/<int:id>/', post_detail),
-    path('posts/create/', create_post)
+    path('posts/create/', create_post),
+
+    path('users/register/', register_view),
+    path('users/login/', login_view),
+    path('users/logout/', logout_view)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
