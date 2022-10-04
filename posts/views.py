@@ -29,7 +29,8 @@ def post_detail(request, id):
         data = {
             'comment_form': Commentform,
             'post': post,
-            'comments': comments
+            'comments': comments,
+            'user': get_user_from_request(request),
         }
         return render(request, 'detail.html', context=data)
     elif request.method == 'POST':
@@ -48,7 +49,8 @@ def post_detail(request, id):
                 'post': post,
                 'comments': comments,
                 'post_form': form,
-                'id': id
+                'id': id,
+                'user': get_user_from_request(request)
             })
 
 
